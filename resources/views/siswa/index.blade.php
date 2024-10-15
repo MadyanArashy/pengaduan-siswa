@@ -14,8 +14,13 @@
         <img src="storage/{{ $siswa->foto }}" alt="Tidak ditemukan" width="150">
     </td>
     <td class="px-4 py-3">
-        <span class="badge text-gray-50 px-4 py-2 rounded-full @if ($siswa->status == 'sedang dalam tinjuan')bg-red-900 @elseif($siswas->status == 'done')badge-success @else badge-gray @endif text-nowrap">
-            {{$siswa->status}}
+        <span class="badge text-gray-50 px-4 py-2 rounded-full select-none text-nowrap
+        @ts-ignore
+            @if ($siswa->status == 'Belum Di Baca') bg-red-900
+            @elseif ($siswa->status == 'Sedang Di Tinjau') bg-yellow-600
+            @elseif ($siswa->status == 'Selesai Di Koreksi') bg-green-900
+            @else bg-gray-400 @endif">
+            {{ $siswa->status }}
         </span>
     </td>
     </tr>

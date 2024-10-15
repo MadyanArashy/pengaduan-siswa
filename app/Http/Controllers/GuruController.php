@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use App\Models\Siswa;
 use App\Models\Guru;
 
@@ -14,32 +15,23 @@ class GuruController extends Controller
     $siswas = Siswa::all();
 
     // Kirim data siswa ke view index.blade.php
-    return view('siswa.index', compact('siswas'));
+    return view('guru.index', compact('siswas'));
     }
 
     // Masukkan data laporan siswa
-    public function store(Request $request)
+    public function update(Request $request, $id): RedirectResponse
     {
         $request->validate([
-            'pelapor'=> 'required|string',
-            'terlapor'=> 'required|string',
-            'kelas'=> 'required|string',
-            'laporan'=> 'required|string',
-            'foto'=> 'required|image|mimes:jpeg,jpg,png,svg,webp|max:2048',
+            'status'=>'required',
         ]);
 
-        $foto = $request->file('foto')->store('bukti', 'public');
+        $siswa = Siswa::findOrFail($id);
 
-        Siswa::create([
-            'pelapor'=> $request->pelapor,
-            'terlapor'=> $request->terlapor,
-            'kelas'=> $request->kelas,
-            'laporan'=> $request->laporan,
-            'foto'=> $foto,
-            'status'=> 'sedang dalam tinjuan',
+        $siswa->update([
+            'status'=> $request->status,
         ]);
 
-        return redirect('siswa.index')->with('Pesan', 'Laporan sudah diterima guru');
+        return redirect('guru')->with('Pesan', 'Status laporan telah diubah');
     }
 
 }
