@@ -38,7 +38,7 @@ class SiswaController extends Controller
             'status'=> 'sedang dalam tinjuan',
         ]);
 
-        return redirect('siswa.index')->with('Pesan', 'Laporan sudah diterima guru');
+        return redirect('siswa')->with('Pesan', 'Laporan sudah diterima guru');
     }
 
 }

@@ -6,9 +6,9 @@
 
     <tr class="border-b dark:border-gray-700">
     <td class="px-4 py-3">{{ $loop->iteration }}</td>
-    <td class="px-4 py-3">{{ $siswa->pelapor}}</td>
-    <td class="px-4 py-3">{{ $siswa->terlapor}}</td>
-    <td class="px-4 py-3">{{ $siswa->kelas}}</td>
+    <td class="px-4 py-3 text-nowrap">{{ $siswa->pelapor}}</td>
+    <td class="px-4 py-3 text-nowrap">{{ $siswa->terlapor}}</td>
+    <td class="px-4 py-3 text-nowrap">{{ $siswa->kelas}}</td>
     <td class="px-4 py-3">{{ $siswa->laporan}}</td>
     <td class="px-4 py-3">
         <img src="storage/{{ $siswa->foto }}" alt="Tidak ditemukan" width="150">

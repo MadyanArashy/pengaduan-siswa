@@ -29,9 +29,6 @@ Route::middleware('auth')->group(function () {
 
 // Route khusus untuk role "siswa"
 Route::group(['middleware' => ['auth', 'role:siswa']], function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
     Route::get('/siswa/', [SiswaController::class, 'index'])->name('siswa.index');
     Route::resource('siswa', SiswaController::class);
     // Tambahkan route lain khusus siswa di sini

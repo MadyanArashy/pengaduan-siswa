@@ -34,15 +34,6 @@ class AuthenticatedSessionController extends Controller
         if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
             $request->session()->regenerate();
 
-
-            // Redirect user based on their role
-            if (Auth::user()->role === 'siswa') {
-                return redirect()->route('siswa.index');
-            } elseif (Auth::user()->role === 'guru') {
-                return redirect()->route('guru.index');
-            }
-
-
             // Default redirect if role is not found
             return redirect()->intended('dashboard');
         }
