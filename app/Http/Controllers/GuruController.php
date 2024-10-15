@@ -31,7 +31,7 @@ class GuruController extends Controller
             'status'=> $request->status,
         ]);
 
-        return redirect('guru')->with('Pesan', 'Status laporan telah diubah');
+        return redirect('guru')->with('pesan', 'Status laporan telah diubah');
     }
 
 }

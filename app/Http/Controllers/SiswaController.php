@@ -35,7 +35,7 @@ class SiswaController extends Controller
             'kelas'=> $request->kelas,
             'laporan'=> $request->laporan,
             'foto'=> $foto,
-            'status'=> 'sedang dalam tinjuan',
+            'status'=> 'Belum Di Baca',
         ]);
 
         return redirect('siswa')->with('Pesan', 'Laporan sudah diterima guru');
