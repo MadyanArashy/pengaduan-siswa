@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -192,4 +192,99 @@
             </div>
         </div>
     </body>
-</html>
+</html> --}}
+
+<x-app-layout>
+    <x-slot name="header">
+        @if (Route::has('login'))
+            <nav class="-mx-3 flex flex-1 justify-start">
+                @auth
+                    <a
+                        href="{{ url('/dashboard') }}"
+                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                    >
+                        Dashboard
+                    </a>
+                @else
+                    <!-- Modal toggle -->
+                    <button
+                        id="loginModalButton" data-modal-target="loginModal" data-modal-toggle="loginModal" type="button"
+                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                    >
+                    Login
+                    </button>
+
+                    <!-- Main modal -->
+                    <div id="loginModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+                        <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+                            <!-- Modal content -->
+                            <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                                @include('auth.login')
+                            </div>
+                        </div>
+                    </div>
+                    @if (Route::has('register'))
+                        <!-- Modal toggle -->
+                        <button
+                        id="registerModalButton" data-modal-target="registerModal" data-modal-toggle="registerModal" type="button"
+                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                        >
+                        Register
+                        </button>
+
+                        <!-- Main modal -->
+                        <div id="registerModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+                            <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+                                <!-- Modal content -->
+                                <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                                    @include('auth.register')
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endauth
+            </nav>
+        @endif
+    </x-slot>
+
+    <section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
+        <div class="mx-auto grid max-w-screen-xl px-4 pb-8 md:grid-cols-12 lg:gap-12 lg:pb-16 xl:gap-0">
+          <div class="content-center justify-self-start md:col-span-7 md:text-start">
+            <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight dark:text-white md:max-w-2xl md:text-5xl xl:text-6xl">Laporkan Pelanggar! <br/> Bantu Sekolah!</h1>
+            <p class="mb-4 max-w-2xl text-gray-500 dark:text-gray-400 md:mb-12 md:text-lg lg:mb-5 lg:text-xl">Ciptakan lingkungan sekolah yang lebih kondusif dengan melaporkan pelanggar peraturan sekolah</p>
+            @if(Auth::user() !== null)
+            <a href="{{ route(Auth::user()->role . 'index') }}" class="inline-block rounded-lg bg-primary-700 px-6 py-3.5 text-center font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Shop Now</a>
+            @else
+            <button
+            id="loginModalButton" data-modal-target="loginModal" data-modal-toggle="loginModal" type="button"
+            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+            >
+            {{ __('Login') }}
+            </button>
+            @endif
+          </div>
+          <div class="hidden md:col-span-5 md:mt-0 md:flex">
+            <img class="dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/girl-shopping-list.svg" alt="shopping illustration" />
+            <img class="hidden dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/girl-shopping-list-dark.svg" alt="shopping illustration" />
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white dark:bg-gray-900">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+            <div class="max-w-screen-md">
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Layanan Pengaduan Masyarakat SMK Pesat IT XPro 200.000+ Aduan yang Sudah Dilayani.</h2>
+                <p class="mb-8 font-light text-gray-500 sm:text-xl dark:text-gray-400">Flowbite helps you connect with friends, family and communities of people who share your interests. Connecting with your friends and family as well as discovering new ones is easy with features like Groups, Watch and Marketplace.</p>
+                <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+                    <a href="#" class="inline-flex items-center justify-center px-4 py-2.5 text-base font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                        Get started
+                    </a>
+                    <a href="#" class="inline-flex items-center justify-center px-4 py-2.5 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                        <svg class="mr-2 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path></svg>
+                        View more
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</x-app-layout>

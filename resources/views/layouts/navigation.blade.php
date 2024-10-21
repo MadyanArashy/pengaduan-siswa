@@ -19,7 +19,7 @@
                     <x-nav-link :href="route(Auth::user()->role . '.index')" :active="request()->routeIs(Auth::user()->role . '.index')">
                         {{ __('Index') }}
                     </x-nav-link>
-                    
+
                 </div>
             </div>
 

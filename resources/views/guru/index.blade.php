@@ -4,9 +4,9 @@
             @foreach ($siswas as $siswa)
             <tr class="border-b dark:border-gray-700">
                 <td class="px-4 py-3">{{ $loop->iteration }}</td>
-                <td class="px-4 py-3">{{ $siswa->pelapor }}</td>
-                <td class="px-4 py-3">{{ $siswa->terlapor }}</td>
-                <td class="px-4 py-3">{{ $siswa->kelas }}</td>
+                <td class="px-4 py-3 text-nowrap">{{ $siswa->pelapor }}</td>
+                <td class="px-4 py-3 text-nowrap">{{ $siswa->terlapor }}</td>
+                <td class="px-4 py-3 text-nowrap">{{ $siswa->kelas }}</td>
                 <td class="px-4 py-3">{{ $siswa->laporan }}</td>
                 <td class="px-4 py-3">
                     <img src="{{ asset('storage/' . $siswa->foto) }}" alt="Tidak ditemukan" width="150">
@@ -16,8 +16,8 @@
                         <x-slot name="trigger">
                             <button class="badge text-gray-50 px-4 py-2 rounded-full flex hover:bg-opacity-80 text-nowrap align-center align-items-center
                                 @if ($siswa->status == 'Belum Di Baca') bg-red-900
-                                @elseif ($siswa->status == 'Sedang Di Tinjau') bg-yellow-600
-                                @elseif ($siswa->status == 'Selesai Di Koreksi') bg-green-900
+                                @elseif ($siswa->status == 'Tinjauan Berlangsung') bg-yellow-600
+                                @elseif ($siswa->status == 'Selesai Di Tinjau') bg-green-900
                                 @else bg-gray-400 @endif">
                                 {{ $siswa->status }}
                                 <div class="ms-1">
@@ -32,13 +32,13 @@
                                 @csrf
                                 @method('PUT')
                                 <input type="hidden" name="status" value="
-                                    @if ($siswa->status == 'Belum Di Baca') Sedang Di Tinjau
-                                    @elseif($siswa->status == 'Sedang Di Tinjau') Selesai Di Koreksi
+                                    @if ($siswa->status == 'Belum Di Baca') Tinjauan Berlangsung
+                                    @elseif($siswa->status == 'Tinjauan Berlangsung') Selesai Di Tinjau
                                     @else Belum Di Baca @endif
                                 ">
                                 <button type="submit" class="button px-4 py-2 w-full text-left">
                                     @if ($siswa->status == 'Belum Di Baca') Mulai Meninjau
-                                    @elseif($siswa->status == 'Sedang Di Tinjau') Selesai Koreksi
+                                    @elseif($siswa->status == 'Tinjauan Berlangsung') Selesai Tinjauan
                                     @else Tinjau Ulang @endif
                                 </button>
                             </form>
